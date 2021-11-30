@@ -1,0 +1,44 @@
+import model.Employee;
+
+import java.util.Scanner;
+
+public class MainClass {
+
+    public static double calculateBMI(double weight, double height){
+        double bmi = weight/(height * height);
+        return bmi;
+    }
+
+    public static void displayBMIStatus(double bmi){
+        if(bmi < 16.0) {
+            System.out.println("UnderWight because your BMI is " + bmi);
+        }else if(bmi >= 16.0 && bmi <= 16.9){
+            System.out.println("Underweight (Moderate thinness) because your BMI is " + bmi);
+        }else if(bmi >= 17.0 && bmi <= 18.4){
+            System.out.println("Underweight (Mild thinness) because your BMI is " + bmi);
+        }else if(bmi >= 18.5 && bmi <= 24.9){
+            System.out.println("Normal range because your BMI is " + bmi);
+        }else if(bmi >= 25.0 && bmi <= 29.9){
+            System.out.println("Overweight (Pre-obese) because your BMI is " + bmi);
+        }else if(bmi >= 30.0 && bmi <= 34.9){
+            System.out.println("Obese (Class I) because your BMI is " + bmi);
+        }else if(bmi >= 35.0 && bmi <= 39.9){
+            System.out.println("Obese (Class II) because your BMI is " + bmi);
+        }else if(bmi >= 40.0){
+            System.out.println("Obese (Class III) because your BMI is " + bmi);
+        }
+    }
+    public static void main(String[] args) {
+
+        System.out.println("Please enter your Weight");
+        Scanner sc = new Scanner(System.in);
+        double weight = sc.nextDouble();
+
+        System.out.println("Please enter your Height");
+        double height = sc.nextDouble();
+
+        double bmi = calculateBMI(weight, height);
+        displayBMIStatus(bmi);
+
+    }
+}
