@@ -170,4 +170,82 @@ ______________________________________________
         tools:text="0" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 
+_________________________________________________
+After adding view binding library (MainActivity)
+_________________________________________________
+
+package com.seip.basic.layout_d13;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.seip.basic.layout_d13.databinding.ActivityMainBinding;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private ActivityMainBinding binding;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        View view = binding.getRoot();
+
+        setContentView(view);
+
+        setListeners();
+
+
+    }
+    @Override
+    public void onClick(View v) {
+        final String n1 = binding.num1.getText().toString();
+        final String n2 = binding.num2.getText().toString();
+
+        if(n1.isEmpty() ){
+            binding.num1.setError("provide a valid number");
+            return;
+        }
+        if(n2.isEmpty() ){
+            binding.num2.setError("provide a valid number");
+            return;
+        }
+        int a = Integer.parseInt(n1);
+        int b = Integer.parseInt(n2);
+        int result = 0;
+
+
+        switch (v.getId()){
+            case R.id.plusBtn:
+                result = a + b;
+                break;
+            case R.id.minusBtn:
+                result = a - b;
+                break;
+            case R.id.multiplyBtn:
+                result = a*b;
+                break;
+            case R.id.divideBtn:
+                result = a / b;
+                break;
+        }
+        binding.resultTV.setText(""+result);
+    }
+
+    private void setListeners(){
+        binding.plusBtn.setOnClickListener(this);
+        binding.minusBtn.setOnClickListener(this);
+        binding.multiplyBtn.setOnClickListener(this);
+        binding.divideBtn.setOnClickListener(this);
+    }
+}
+
+
+
 
