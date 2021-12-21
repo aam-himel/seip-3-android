@@ -1,0 +1,119 @@
+------------- Movie Adapter ------------------
+package com.seip.basic.recyclerview_practice.adapters;
+
+import android.annotation.SuppressLint;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.seip.basic.recyclerview_practice.R;
+import com.seip.basic.recyclerview_practice.models.Movie;
+
+import java.util.List;
+
+public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHolder> {
+
+    private List<Movie> movieList;
+
+
+    @NonNull
+    @Override
+    public MovieAdapter.MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.movie_design, parent,false);
+        return new MovieViewHolder(itemView);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull MovieAdapter.MovieViewHolder holder, int position) {
+        final Movie movie = movieList.get(position);
+        holder.movieTitle.setText(movie.getMovieName());
+        holder.moviePoster.setImageResource(movie.getMoviePoster());
+        holder.movieRating.setText(movie.getMovieRating());
+    }
+
+    @Override
+    public int getItemCount() {
+        return movieList.size();
+    }
+
+    class MovieViewHolder extends RecyclerView.ViewHolder{
+        TextView movieTitle, movieRating;
+        ImageView moviePoster;
+        public MovieViewHolder(@NonNull View itemView) {
+            super(itemView);
+            movieTitle = itemView.findViewById(R.id.movieTitle);
+            movieRating = itemView.findViewById(R.id.rating);
+        }
+    }
+}
+
+
+---------------------- Movie -------------------
+package com.seip.basic.recyclerview_practice.models;
+
+import androidx.annotation.NonNull;
+
+import com.seip.basic.recyclerview_practice.R;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Movie {
+    private String movieName;
+    private String movieRating;
+    private int moviePoster;
+
+    public Movie(String movieName, String movieRating, int moviePoster) {
+        this.movieName = movieName;
+        this.movieRating = movieRating;
+        this.moviePoster = moviePoster;
+    }
+
+    public String getMovieName() {
+        return movieName;
+    }
+
+    public void setMovieName(String movieName) {
+        this.movieName = movieName;
+    }
+
+    public String getMovieRating() {
+        return movieRating;
+    }
+
+    public void setMovieRating(String movieRating) {
+        this.movieRating = movieRating;
+    }
+
+    public int getMoviePoster() {
+        return moviePoster;
+    }
+
+    public void setMoviePoster(int moviePoster) {
+        this.moviePoster = moviePoster;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "movieName='" + movieName + '\'' +
+                ", movieRating='" + movieRating + '\'' +
+                ", moviePoster=" + moviePoster +
+                '}';
+    }
+
+    public static List<Movie> getAllMovies(){
+        List<Movie> movies = new ArrayList<>();
+        movies.add(new Movie("Moonlight", "4.6", R.drawable.moonlinte));
+        movies.add(new Movie("Paterson", "4.3", R.drawable.paterson));
+        movies.add(new Movie("Ornitologo", "4.9", R.drawable.ornitologo));
+
+        return movies;
+    }
+}
